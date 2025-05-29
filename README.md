@@ -1,154 +1,145 @@
-## Simulating and Analyzing Deadlock and Memory Allocation Strategies in Operating Systems
+# 🖥️ OS Deadlock & Memory Allocation Simulator
 
-Deadlock is a situation in computing where multiple processes are unable to proceed because each is waiting for a resource held by another, leading to a complete system standstill. For a deadlock to occur, four conditions must exist simultaneously—known as the Coffman conditions:
-
-1. **Mutual Exclusion**: Resources cannot be shared.
-2. **Hold and Wait**: A process holds one resource while waiting for another.
-3. **No Preemption**: Resources cannot be forcibly taken from processes.
-4. **Circular Wait**: A closed chain of processes exists, where each process waits for a resource held by the next.
-
-Understanding these conditions is key to analyzing and preventing deadlocks in system design.
-
-Deadlocks can be **detected** using techniques such as wait-for graphs or by checking for circular wait conditions. Once detected, systems can **recover** by terminating processes, preempting resources, or rolling back to a safe state.
-
-**Prevention** strategies aim to eliminate at least one Coffman condition. For instance:
-- Requiring all resources to be requested at once (avoiding hold and wait),
-- Using algorithms like the **Banker's Algorithm** to ensure the system remains in a safe state before allocating resources.
-
-These approaches are especially important in environments requiring high reliability and uptime, such as real-time or distributed systems. If left unaddressed, deadlocks can degrade system performance, cause application crashes, or lead to data loss. In distributed systems, the absence of a centralized resource manager makes deadlocks even more complex to handle.
-
-Therefore, **proactive deadlock testing and simulation** are crucial during system development. Overall, robust deadlock management through detection, prevention, and recovery—is essential for maintaining efficient and stable computing environments across all types of operating systems.
-## Team Member Names and Roles
-
-| Member Name              | Contribution                                                        |
-|--------------------------|----------------------------------------------------------------------|
-| Mark Andrie Atienza      | README, Report Writing                                               |
-| John Lance Baljon        | Proofreading, Testing & Support, Final Polishing                    |
-| Joshua Vincent Bernardino| Theory, Programming, & Algorithm Implementation                     |
-| Ma. Margaret Fundano     | Presentation Creation, Video Editing, Documentation, Proofreading   |
-| Joven Serrano            | Data Analysis, Report Writing                                       |
-
+A Python project to **simulate, visualize, and analyze deadlock avoidance and memory allocation strategies** in operating systems. This tool demonstrates how the Banker's Algorithm and classic memory allocation methods (First Fit, Best Fit, Worst Fit) behave under various process workloads, helping students and engineers understand resource management and deadlock prevention.
 
 ---
 
-## 📸 Sample Output Screenshots & Code Explanation
+## 📖 Table of Contents
 
-### 🧠 Code Overview
-
-This project simulates **deadlock detection** and **memory allocation efficiency** using classical operating system algorithms implemented in Python.
+- [Overview](#overview)
+- [Key Concepts](#key-concepts)
+- [How It Works](#how-it-works)
+- [Sample Output](#sample-output)
+- [Strategy Comparison](#strategy-comparison)
+- [How to Run](#how-to-run)
+- [Team Members](#team-members)
+- [License](#license)
 
 ---
 
-### 🔍 Banker's Algorithm
+## 📝 Overview
 
-The `BankersAlgorithm` class is used for simulating **deadlock avoidance**:
+This project models how an operating system manages resources and memory for multiple processes, focusing on:
 
-* `request_resources(process_id, request)`
-  → Allocates resources if the request does not lead to an unsafe state.
-* `is_safe()`
-  → Simulates whether the current state is safe using the Work and Finish vectors.
+- **Deadlock avoidance** using the Banker's Algorithm.
+- **Memory allocation** using First Fit, Best Fit, and Worst Fit strategies.
+- **Visualization** of allocation success, fragmentation, deadlock occurrence, and runtime for each strategy and scenario.
 
-**Deadlock is avoided** by allowing resource allocation only if the system remains in a safe state after granting the request.
+You can run multiple scenarios to observe how different strategies perform under varying workloads and resource demands.
+
+---
+
+## 📚 Key Concepts
+
+### 💥 Deadlock in Operating Systems
+
+A **deadlock** occurs when processes are stuck waiting for each other’s resources, causing the system to halt. The four Coffman conditions for deadlock are:
+
+1. **Mutual Exclusion**: Resources are non-shareable.
+2. **Hold and Wait**: Processes hold resources while waiting for others.
+3. **No Preemption**: Resources cannot be forcibly taken.
+4. **Circular Wait**: A cycle of processes exists, each waiting for the next.
+
+**Deadlock avoidance** is critical for system reliability, especially in real-time and distributed systems.
+
+---
+
+### 🏦 Banker's Algorithm
+
+The **Banker's Algorithm** checks if granting a resource request keeps the system in a safe state. If not, the request is denied to avoid deadlock.
+
+- `request_resources(process_id, request)`: Allocates resources if safe.
+- `is_safe()`: Checks if the system remains in a safe state after allocation.
 
 ---
 
 ### 💾 Memory Allocation Strategies
 
-Implemented in the `MemoryAllocator` class, the simulation uses:
+Implemented in the `MemoryAllocator` class:
 
-* **First Fit**: Allocates the first block large enough for the process.
-* **Best Fit**: Chooses the smallest available block that fits the process.
-* **Worst Fit**: Chooses the largest block to potentially minimize fragmentation.
-
-Each strategy returns a boolean for success and updates memory block sizes.
+- **First Fit**: Allocates the first block large enough.
+- **Best Fit**: Allocates the smallest suitable block.
+- **Worst Fit**: Allocates the largest available block.
 
 ---
 
-### 🔁 Simulation Process
+## 🔁 How It Works
 
 For each scenario:
 
-* A **Banker's Algorithm** instance manages resource requests.
-* Memory is allocated using **First Fit**, **Best Fit**, and **Worst Fit**.
-* **Metrics Tracked**:
-
-  * Allocation success
-  * Memory fragmentation
-  * Deadlock occurrence
-  * Runtime (execution time)
-
----
-
-### 📊 Sample Results (Scenario 1)
-
-```bash
-Running Scenario 1:
-Allocation Success:
-First Fit: [True, True, True]
-Best Fit: [True, True, True]
-Worst Fit: [True, True, False]
-
-Memory Fragmentation:
-[1100, 650, 290]
-
-Deadlock Occurrence:
-First Fit: [True, True, True]
-Best Fit: [False, False, False]
-Worst Fit: [False, False, True]
-
-Success Rates:
-First Fit: 100%
-Best Fit: 100%
-Worst Fit: 66.67%
-```
+1. **Resource requests** and **memory allocations** are simulated for a set of processes.
+2. The **Banker's Algorithm** manages resource safety.
+3. Memory is allocated using all three strategies.
+4. The following metrics are tracked and visualized:
+    - Allocation success
+    - Memory fragmentation
+    - Deadlock occurrence
+    - Runtime
 
 ---
 
-### 📈 Sample Output Graphs
+## 📊 Sample Output
 
-#### ✅ Allocation & Fragmentation (Scenario 1)
+**Console Output:**
 
-![Allocation Fragmentation](img/scenario1_allocation_fragmentation.jpg)
 
-#### ❌ Deadlock & Runtime (Scenario 1)
+**Sample Graphs:**
 
-![Deadlock Runtime](img/scenario1_deadlock_runtime.jpg)
+- **Allocation & Fragmentation (3D Line Plot)**
+- **Deadlock & Runtime (3D Line Plot)**
 
-> **Legend**:
->
-> * **Solid lines**: Allocation / Runtime
-> * **Dashed lines**: Fragmentation / Deadlock Occurrence
+> ![Sample Graph](img/scenario1_allocation_fragmentation.jpg)
 
 ---
 
-### 📌 Observations Across Scenarios
+## 🏆 Strategy Comparison
 
-| Strategy  | Avg Success Rate | Deadlock Resistance | Fragmentation Handling | Runtime Stability |
-| --------- | ---------------- | ------------------- | ---------------------- | ----------------- |
-| First Fit | High             | Poor                | Worst                  | Stable            |
-| Best Fit  | High             | Excellent           | Best                   | Stable            |
-| Worst Fit | Moderate         | Inconsistent        | Moderate               | Stable            |
+| Strategy  | Success Rate | Deadlock Resistance | Fragmentation Handling | Runtime Stability |
+|-----------|--------------|--------------------|-----------------------|------------------|
+| First Fit | High         | Poor               | Worst                 | Stable           |
+| Best Fit  | High         | Excellent          | Best                  | Stable           |
+| Worst Fit | Moderate     | Inconsistent       | Moderate              | Stable           |
 
----
-
-### 🏆 Best Performing Strategy
-
-**✅ Best Fit**
-✔ High allocation success
-✔ Lowest deadlock occurrence
-✔ Efficient fragmentation handling
-✔ Scales well under pressure
+**Best Overall:**  
+**Best Fit** — consistently high success, low deadlock, and efficient fragmentation handling.
 
 ---
 
-### 📂 How to Use
+## 🛠️ How to Run
 
-```bash
-# Run the simulation
-python memory_simulation.py
-```
+1. **Install dependencies:**
+    ```bash
+    pip install matplotlib
+    ```
 
-Ensure the required library is installed:
+2. **Run the simulation:**
+    ```bash
+    python OS_Final_Deadlock_MemorySim.py
+    ```
 
-```bash
-pip install matplotlib
+3. **View results:**  
+   - Console output for each scenario  
+   - 3D line plots for allocation, fragmentation, deadlock, and runtime
+
+---
+
+## 👥 Team Members
+
+| Name                        | Contribution                                      |
+|-----------------------------|---------------------------------------------------|
+| Mark Andrie Atienza         | README, Report Writing                            |
+| John Lance Baljon           | Proofreading, Testing, Final Polishing            |
+| Joshua Vincent Bernardino   | Theory, Programming, Algorithm Implementation     |
+| Ma. Margaret Fundano        | Presentation, Video Editing, Documentation        |
+| Joven Serrano               | Data Analysis, Report Writing                     |
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.  
+Feel free to fork, modify, and use this project for your OS studies or research!
+
+---
+
+**Happy Simulating! 🚦**
