@@ -44,10 +44,10 @@ The system provides comparative analysis of:
 | Role | Member | Contribution | Emoji Badge |
 |------|--------|--------------|-------------|
 | **Project Leader** | [Joshua Vincent Bernardino](https://github.com/Juswa-Juswa) | Theory, Programming, & Algorithm Implementation and Creation | 💻 |
-| **Documentation Specialist** | [Mark Andrie Atienza](https://github.com/mark-atienza) | Read Me, Documentation (Conclusion), Report Writing | 📝 |
-| **Testing & Quality Assurance** | [John Lance Baljon](https://github.com/lancerpotpot) | Testing & Support, Documentation (Final Polishing, Proofreading) | 🧪 |
-| **Presentation Specialist** | [Ma. Margaret Fundano](https://github.com/) | Presentation Creation, Video Editing, Documentation (Introduction, Methodology Proofreading) | 🎨 |
-| **Data Analyst** | [Joven Serrano](https://github.com/joven-serrano) | Data Implementation and Analysis (Plot Analysis and Creation) | 📊 |
+| **Documentation Specialist** | [Mark Andrie Atienza](https://github.com/mark-atienza) | Documentation (Conclusion), Report Writing | 📝 |
+| **Testing & Quality Assurance** | [John Lance Baljon](https://github.com/lancerpotpot) | Testing & Support, Documentation (Final Polishing & Proofreading) | 🧪 |
+| **Presentation Specialist** | [Ma. Margaret Fundano](https://github.com/) | Presentation Creation, Video Editing, Documentation (Introduction, Methodology, & Proofreading) | 🎨 |
+| **Data Analyst** | [Joven Serrano](https://github.com/joven-serrano) | Data Implementation and Analysis (Plot Analysis & Creation) | 📊 |
 
 </div>
 
