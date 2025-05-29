@@ -124,7 +124,7 @@ class MemoryAllocator:
 
 def simulate_memory_allocation_and_deadlock(scenario):
     # Simulate memory allocation and deadlock detection for a given scenario
-    processes = 3  # Number of processes
+    processes = len(scenario)  # Number of processes matches number of requests
     max_resources = [10, 5, 7]  # Maximum resources for each type
     available_resources = [3, 2, 2]  # Available resources in the system
     banker = BankersAlgorithm(processes, max_resources, available_resources)  # Create an instance of BankersAlgorithm
@@ -193,10 +193,11 @@ def simulate_memory_allocation_and_deadlock(scenario):
 
 def plot_results(allocation_results, fragmentation_results, runtime_results, deadlock_results, scenario_number):
     # Plot the results of memory allocation success and fragmentation in a 3D line graph
-    fig = plt.figure(figsize=(16, 12)) 
+    fig = plt.figure(figsize=(14, 10)) 
     ax = fig.add_subplot(111, projection='3d') 
 
-    x = [1, 2, 3]  
+    # Dynamically set x based on number of requests
+    x = list(range(1, len(next(iter(allocation_results.values()))) + 1))
 
     y_allocation = [0, 1, 2]  
     y_fragmentation = [0, 1, 2]  
@@ -216,19 +217,19 @@ def plot_results(allocation_results, fragmentation_results, runtime_results, dea
                 label=f'{strategy} Fragmentation', linestyle='--', marker=marker, color=color, linewidth=3)  
 
     # Set labels and title for the plot
-    ax.set_xlabel('Request Number', fontsize=16)
-    ax.set_ylabel('Type', fontsize=16)
-    ax.set_zlabel('Count', fontsize=16)
+    ax.set_xlabel('Request Number', fontsize=11)
+    ax.set_ylabel('Type', fontsize=11)
+    ax.set_zlabel('Count', fontsize=11)
     ax.set_yticks([0, 1])  
-    ax.set_yticklabels(['Allocation Success', 'Fragmentation'], fontsize=14)
+    ax.set_yticklabels(['Allocation Success', 'Fragmentation'], fontsize=11)
     ax.set_title(f'3D Line Graph of Memory Allocation Success and Fragmentation (Scenario {scenario_number})', fontsize=18)  
-    ax.legend(fontsize=14) 
+    ax.legend(fontsize=11) 
     ax.grid(True)
 
     plt.show() 
 
     # Plot the results of runtime and deadlock occurrence in a 3D line graph
-    fig = plt.figure(figsize=(16, 12)) 
+    fig = plt.figure(figsize=(14, 10)) 
     ax = fig.add_subplot(111, projection='3d') 
 
     # Plotting runtime for each strategy
@@ -242,13 +243,13 @@ def plot_results(allocation_results, fragmentation_results, runtime_results, dea
                 label=f'{strategy} Deadlock', linestyle='--', marker=marker, color=color, linewidth=3)  
 
     # Set labels and title for the plot
-    ax.set_xlabel('Request Number', fontsize=16)
-    ax.set_ylabel('Type', fontsize=16)
-    ax.set_zlabel('Value', fontsize=16)
+    ax.set_xlabel('Request Number', fontsize=11)
+    ax.set_ylabel('Type', fontsize=11)
+    ax.set_zlabel('Value', fontsize=11)
     ax.set_yticks([3, 4, 5])  
-    ax.set_yticklabels(['First Fit Runtime', 'Best Fit Runtime', 'Worst Fit Runtime'], fontsize=14)
+    ax.set_yticklabels(['First Fit Runtime', 'Best Fit Runtime', 'Worst Fit Runtime'], fontsize=11)
     ax.set_title(f'3D Line Graph of Runtime and Deadlock Occurrence (Scenario {scenario_number})', fontsize=18)  
-    ax.legend(fontsize=14) 
+    ax.legend(fontsize=11) 
     ax.grid(True)
 
     plt.show() 
@@ -281,12 +282,18 @@ def print_results(allocation_results, fragmentation_results, runtime_results, de
 
 if __name__ == "__main__":
     scenarios = [
-        [([1, 0, 2], 200), ([2, 0, 1], 150), ([0, 1, 1], 180)],  # Scenario 1: All Allocations Succeed
-        [([1, 1, 1], 120), ([2, 2, 0], 250), ([3, 0, 1], 320)],  # Scenario 2: Some Allocations Fail
-        [([1, 1, 1], 110), ([1, 1, 1], 115), ([1, 1, 1], 120)],  # Scenario 3: Deadlock Occurs
-        [([1, 0, 2], 210), ([2, 0, 0], 140), ([3, 1, 1], 310)],  # Scenario 4: Mixed Outcomes
-        [([4, 0, 0], 105), ([5, 4, 5], 95), ([0, 0, 4], 110)],   # Scenario 5: All Failures
-        [([1, 0, 1], 95), ([1, 1, 1], 105), ([2, 2, 2], 295)]    # Scenario 6: Safe State with Partial Failures
+        # Scenario 1: All Allocations Succeed, low resource/memory usage
+        [([1, 0, 1], 80), ([1, 1, 0], 90), ([0, 1, 1], 70), ([1, 0, 1], 60), ([0, 1, 0], 50)],
+        # Scenario 2: Some Allocations Fail due to memory/resource exhaustion
+        [([2, 2, 2], 400), ([3, 1, 0], 250), ([1, 2, 1], 300), ([2, 0, 2], 200), ([2, 1, 2], 350)],
+        # Scenario 3: Deadlock Occurs (requests exceed available, circular wait)
+        [([2, 1, 2], 200), ([2, 2, 2], 250), ([2, 2, 2], 300), ([2, 1, 2], 150), ([2, 2, 2], 100)],
+        # Scenario 4: Mixed Outcomes (some succeed, some fail, some fragment)
+        [([1, 0, 2], 210), ([2, 0, 0], 140), ([3, 1, 1], 310), ([1, 2, 1], 120), ([0, 1, 2], 180)],
+        # Scenario 5: All Failures (requests too large for available resources/memory)
+        [([5, 5, 5], 700), ([6, 4, 6], 800), ([7, 5, 7], 900), ([8, 6, 8], 1000), ([9, 7, 9], 1100)],
+        # Scenario 6: Fragmentation Test (small requests after large allocations)
+        [([3, 0, 2], 500), ([2, 2, 1], 400), ([1, 1, 1], 50), ([1, 0, 1], 60), ([0, 1, 0], 40)],
     ]
 
     # Run each scenario and collect results
