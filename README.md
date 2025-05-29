@@ -1,145 +1,407 @@
-# 🖥️ OS Deadlock & Memory Allocation Simulator
+# 🧠 OS Memory Allocation & Deadlock Avoidance Simulator
 
-A Python project to **simulate, visualize, and analyze deadlock avoidance and memory allocation strategies** in operating systems. This tool demonstrates how the Banker's Algorithm and classic memory allocation methods (First Fit, Best Fit, Worst Fit) behave under various process workloads, helping students and engineers understand resource management and deadlock prevention.
+<div align="center">
 
----
+![Python](https://img.shields.io/badge/Python-3.8+-3776AB?logo=python&logoColor=white)
+![Matplotlib](https://img.shields.io/badge/Visualization-Matplotlib-%230055AA)
+![Scenarios](https://img.shields.io/badge/Scenarios-6-blueviolet)
 
-## 📖 Table of Contents
+</div>
 
-- [Overview](#overview)
-- [Key Concepts](#key-concepts)
-- [How It Works](#how-it-works)
-- [Sample Output](#sample-output)
-- [Strategy Comparison](#strategy-comparison)
-- [How to Run](#how-to-run)
-- [Team Members](#team-members)
-- [License](#license)
+<div align="center">
 
----
+## 🌟 Project Overview
 
-## 📝 Overview
+</div>
 
-This project models how an operating system manages resources and memory for multiple processes, focusing on:
+<div align="center">
 
-- **Deadlock avoidance** using the Banker's Algorithm.
-- **Memory allocation** using First Fit, Best Fit, and Worst Fit strategies.
-- **Visualization** of allocation success, fragmentation, deadlock occurrence, and runtime for each strategy and scenario.
+### *An advanced simulation tool that visualizes memory allocation strategies and deadlock prevention algorithms through interactive 3D plots*
 
-You can run multiple scenarios to observe how different strategies perform under varying workloads and resource demands.
+</div>
 
----
+The system provides comparative analysis of:
 
-## 📚 Key Concepts
+<div align="center">
 
-### 💥 Deadlock in Operating Systems
+| **Memory Allocation** | **Deadlock Prevention** | **Performance Metrics** |
+|-----------------------|-------------------------|------------------------|
+| 🎯 First Fit          | 🏦 Banker's Algorithm   | 📈 Allocation Success  |
+| 📏 Best Fit           | 🛡️ Safety Checks       | 🧩 Memory Fragmentation|
+| 📦 Worst Fit          | 🔒 Resource Validation  | ⏱️ Algorithm Runtime  |
+|                       |                         | ⚠️ Deadlock Occurrence |
 
-A **deadlock** occurs when processes are stuck waiting for each other’s resources, causing the system to halt. The four Coffman conditions for deadlock are:
+</div>
 
-1. **Mutual Exclusion**: Resources are non-shareable.
-2. **Hold and Wait**: Processes hold resources while waiting for others.
-3. **No Preemption**: Resources cannot be forcibly taken.
-4. **Circular Wait**: A cycle of processes exists, each waiting for the next.
+<div align="center">
 
-**Deadlock avoidance** is critical for system reliability, especially in real-time and distributed systems.
+## 👥 Team Structure & Responsibilities
 
----
+</div>
 
-### 🏦 Banker's Algorithm
+<div align="center">
 
-The **Banker's Algorithm** checks if granting a resource request keeps the system in a safe state. If not, the request is denied to avoid deadlock.
+| Role | Member | Contribution | Emoji Badge |
+|------|--------|--------------|-------------|
+| **Project Leader** | [Joshua Vincent Bernardino](https://github.com/Juswa-Juswa) | Theory, Programming, & Algorithm Implementation and Creation | 💻 |
+| **Documentation Specialist** | [Mark Andrie Atienza](https://github.com/mark-atienza) | Read Me, Documentation (Conclusion), Report Writing | 📝 |
+| **Testing & Quality Assurance** | [John Lance Baljon](https://github.com/lancerpotpot) | Testing & Support, Documentation (Final Polishing, Proofreading) | 🧪 |
+| **Presentation Specialist** | [Ma. Margaret Fundano](https://github.com/) | Presentation Creation, Video Editing, Documentation (Introduction, Methodology Proofreading) | 🎨 |
+| **Data Analyst** | [Joven Serrano](https://github.com/joven-serrano) | Data Implementation and Analysis (Plot Analysis and Creation) | 📊 |
 
-- `request_resources(process_id, request)`: Allocates resources if safe.
-- `is_safe()`: Checks if the system remains in a safe state after allocation.
+</div>
 
----
+<div align="center">
 
-### 💾 Memory Allocation Strategies
+## 🧩 Core Implementation
 
-Implemented in the `MemoryAllocator` class:
+</div>
 
-- **First Fit**: Allocates the first block large enough.
-- **Best Fit**: Allocates the smallest suitable block.
-- **Worst Fit**: Allocates the largest available block.
+### System Architecture
 
----
+The simulation system consists of three main components working together:
 
-## 🔁 How It Works
+1. **🏦 Banker's Algorithm**: Prevents deadlocks through resource allocation validation
+2. **📦 Memory Allocator**: Implements First Fit, Best Fit, and Worst Fit strategies  
+3. **📊 Performance Monitor**: Tracks success rates, fragmentation, runtime, and deadlock occurrence
 
-For each scenario:
+<div align="center">
 
-1. **Resource requests** and **memory allocations** are simulated for a set of processes.
-2. The **Banker's Algorithm** manages resource safety.
-3. Memory is allocated using all three strategies.
-4. The following metrics are tracked and visualized:
-    - Allocation success
-    - Memory fragmentation
-    - Deadlock occurrence
-    - Runtime
+### 📋 Simulation Scenarios
 
----
+</div>
 
-## 📊 Sample Output
+<div align="center">
 
-**Console Output:**
+#### *The system tests 6 comprehensive scenarios designed to evaluate different system conditions*
 
+</div>
 
-**Sample Graphs:**
+<div align="center">
 
-- **Allocation & Fragmentation (3D Line Plot)**
-- **Deadlock & Runtime (3D Line Plot)**
+| Scenario | Description | Resource Pattern | Memory Pattern |
+|----------|-------------|------------------|----------------|
+| **1** | Optimal Conditions | Low usage (1-2 units) | Small processes (50-90KB) |
+| **2** | Resource Contention | Moderate usage (2-3 units) | Medium processes (200-400KB) |
+| **3** | Deadlock Conditions | High usage (2 units each) | Variable processes (100-300KB) |
+| **4** | Mixed Workload | Variable usage (0-3 units) | Mixed processes (120-310KB) |
+| **5** | Resource Exhaustion | Excessive usage (5-9 units) | Large processes (700-1100KB) |
+| **6** | Fragmentation Test | Mixed pattern (0-3 units) | Large then small (40-500KB) |
 
-> ![Sample Graph](img/scenario1_allocation_fragmentation.jpg)
+</div>
 
----
+<div align="center">
 
-## 🏆 Strategy Comparison
+### 💻 Complete Source Code
 
-| Strategy  | Success Rate | Deadlock Resistance | Fragmentation Handling | Runtime Stability |
-|-----------|--------------|--------------------|-----------------------|------------------|
-| First Fit | High         | Poor               | Worst                 | Stable           |
-| Best Fit  | High         | Excellent          | Best                  | Stable           |
-| Worst Fit | Moderate     | Inconsistent       | Moderate              | Stable           |
+**📂 All implementation details can be found in:** [`SourceCode.py`](SourceCode.py)
 
-**Best Overall:**  
-**Best Fit** — consistently high success, low deadlock, and efficient fragmentation handling.
+*The complete source code includes the Banker's Algorithm, Memory Allocation Strategies, Simulation Workflow, and 3D Visualization System with all necessary functions and classes.*
 
----
+</div>
 
-## 🛠️ How to Run
-
-1. **Install dependencies:**
-    ```bash
-    pip install matplotlib
-    ```
-
-2. **Run the simulation:**
-    ```bash
-    python OS_Final_Deadlock_MemorySim.py
-    ```
-
-3. **View results:**  
-   - Console output for each scenario  
-   - 3D line plots for allocation, fragmentation, deadlock, and runtime
+**Key Components Available in SourceCode.py:**
+- **🏦 BankersAlgorithm Class**: Complete deadlock prevention implementation
+- **📦 MemoryAllocator Class**: All three allocation strategies (First Fit, Best Fit, Worst Fit)
+- **⚙️ Simulation Functions**: Comprehensive testing workflow
+- **🎯 Visualization System**: Interactive 3D plotting capabilities
+- **📊 Performance Monitoring**: Metrics tracking and analysis tools
 
 ---
 
-## 👥 Team Members
+<div align="center">
 
-| Name                        | Contribution                                      |
-|-----------------------------|---------------------------------------------------|
-| Mark Andrie Atienza         | README, Report Writing                            |
-| John Lance Baljon           | Proofreading, Testing, Final Polishing            |
-| Joshua Vincent Bernardino   | Theory, Programming, Algorithm Implementation     |
-| Ma. Margaret Fundano        | Presentation, Video Editing, Documentation        |
-| Joven Serrano               | Data Analysis, Report Writing                     |
+# 📊 Simulation Results Analysis
+
+</div>
+
+<div align="center">
+
+## 📋 Performance Overview
+
+</div>
+
+<div align="center">
+
+| Scenario | First Fit | Best Fit | Worst Fit | Deadlock Risk |
+|----------|-----------|----------|-----------|---------------|
+| 1        | ✅ 100%   | ✅ 100%  | ✅ 100%   | ⚠️ Medium     |
+| 2        | ⚠️ 60%    | ⚠️ 40%   | ❌ 0%     | ⚠️ High       |
+| 3        | ✅ 80%    | ⚠️ 40%   | ⚠️ 40%    | ⚠️ High       |
+| 4        | ⚠️ 60%    | ⚠️ 60%   | ⚠️ 60%    | ⚠️ Medium     |
+| 5        | ❌ 0%     | ❌ 0%    | ❌ 0%     | ⚠️ Critical  |
+| 6        | ✅ 80%    | ✅ 80%   | ⚠️ 60%    | ⚠️ Medium     |
+
+</div>
+
+<div align="center">
+
+> **Key Insight**: *First Fit showed highest allocation success (63.3% avg) while Best Fit demonstrated best memory efficiency*
+
+</div>
+
+## 🔍 Detailed Scenario Analysis
+
+### Scenario 1: Optimal Conditions
+
+<div align="center">
+
+| **Metric**            | First Fit | Best Fit | Worst Fit |
+|-----------------------|-----------|----------|-----------|
+| **Success Rate**      | 100% ✅   | 100% ✅  | 100% ✅   |
+| **Avg Fragmentation** | 750KB     | 700KB    | 650KB     |
+| **Deadlock Occurrence**| High ⚠️  | None ✅  | None ✅   |
+
+</div>
+
+**Fragmentation Evolution**  
+
+<div align="center">
+
+| Request | 1      | 2      | 3      | 4     | 5     |
+|---------|--------|--------|--------|-------|-------|
+| First   | 1620KB | 1370KB | 1120KB | 920KB | 750KB |
+| Best    | 1540KB | 1280KB | 1050KB | 860KB | 700KB |
+| Worst   | 1460KB | 1190KB | 980KB  | 800KB | 650KB |
+
+</div>
+
+<div align="center">
+  <img src="OS_imgs/Scenario1_Graph_MASnF.png" width="45%" alt="Allocation Success & Fragmentation">
+  <img src="OS_imgs/Scenario1_Graph_RnDO.png" width="45%" alt="Runtime & Deadlock">
+</div>
+
+<div align="center">
+
+> 💡 *All strategies achieved perfect allocation under light load. Best Fit showed superior memory efficiency.*
+
+</div>
+
+### Scenario 2: Resource Contention
+
+<div align="center">
+
+| **Metric**            | First Fit | Best Fit | Worst Fit |
+|-----------------------|-----------|----------|-----------|
+| **Success Rate**      | 60% ⚠️   | 40% ⚠️  | 0% ❌    |
+| **Avg Fragmentation** | 250KB     | 250KB    | 250KB     |
+| **Deadlock Occurrence**| High ⚠️  | Medium ⚠️| Critical ⚠️|
+
+</div>
+
+**Allocation Failures**  
+
+<div align="center">
+
+| Request | 1 | 2 | 3 | 4 | 5 |
+|---------|---|---|---|---|---|
+| First   | ✅ | ✅ | ❌ | ✅ | ❌ |
+| Best    | ✅ | ❌ | ❌ | ✅ | ❌ |
+| Worst   | ❌ | ❌ | ❌ | ❌ | ❌ |
+
+</div>
+
+<div align="center">
+  <img src="OS_imgs/Scenario2_Graph_MASnF.png" width="45%" alt="Allocation Success & Fragmentation">
+  <img src="OS_imgs/Scenario2_Graph_RnDO.png" width="45%" alt="Runtime & Deadlock">
+</div>
+
+<div align="center">
+
+> ⚠️ *Worst Fit failed completely under moderate load. First Fit showed better resilience despite deadlock risks.*
+
+</div>
+
+### Scenario 3: Deadlock Conditions
+
+<div align="center">
+
+| **Metric**            | First Fit | Best Fit | Worst Fit |
+|-----------------------|-----------|----------|-----------|
+| **Success Rate**      | 80% ✅   | 40% ⚠️  | 40% ⚠️   |
+| **Avg Fragmentation** | 100KB     | 100KB    | 100KB     |
+| **Deadlock Occurrence**| Critical ⚠️| High ⚠️| High ⚠️ |
+
+</div>
+
+**Deadlock Pattern**  
+
+<div align="center">
+
+| Request | 1 | 2 | 3 | 4 | 5 |
+|---------|---|---|---|---|---|
+| First   | ⚠️ | ⚠️ | ⚠️ | ⚠️ | ⚠️ |
+| Best    | ✅ | ✅ | ⚠️ | ⚠️ | ⚠️ |
+| Worst   | ✅ | ✅ | ⚠️ | ⚠️ | ⚠️ |
+
+</div>
+
+<div align="center">
+  <img src="OS_imgs/Scenario3_Graph_MASnF.png" width="45%" alt="Allocation Success & Fragmentation">
+  <img src="OS_imgs/Scenario3_Graph_RnDO.png" width="45%" alt="Runtime & Deadlock">
+</div>
+
+<div align="center">
+
+> 🛡️ *First Fit maintained 80% success in deadlock conditions. Banker's Algorithm prevented complete system lock.*
+
+</div>
+
+### Scenario 4: Mixed Workload
+
+<div align="center">
+
+| **Metric**            | First Fit | Best Fit | Worst Fit |
+|-----------------------|-----------|----------|-----------|
+| **Success Rate**      | 60% ⚠️   | 60% ⚠️  | 60% ⚠️   |
+| **Avg Fragmentation** | 290KB     | 290KB    | 290KB     |
+| **Deadlock Occurrence**| High ⚠️  | Medium ⚠️| Medium ⚠️|
+
+</div>
+
+**Memory Efficiency**  
+
+<div align="center">
+
+| Strategy   | Fragmentation Reduction |
+|------------|-------------------------|
+| First Fit  | 1490KB → 290KB (-80.5%) |
+| Best Fit   | 1280KB → 290KB (-77.3%) |
+| Worst Fit  | 1070KB → 290KB (-72.9%) |
+
+</div>
+
+<div align="center">
+  <img src="OS_imgs/Scenario4_Graph_MASnF.png" width="45%" alt="Allocation Success & Fragmentation">
+  <img src="OS_imgs/Scenario4_Graph_RnDO.png" width="45%" alt="Runtime & Deadlock">
+</div>
+
+<div align="center">
+
+> ⚖️ *All strategies showed identical success rates. Best Fit demonstrated superior memory efficiency throughout.*
+
+</div>
+
+### Scenario 5: Resource Exhaustion
+
+<div align="center">
+
+| **Metric**            | First Fit | Best Fit | Worst Fit |
+|-----------------------|-----------|----------|-----------|
+| **Success Rate**      | 0% ❌    | 0% ❌   | 0% ❌    |
+| **Avg Fragmentation** | 1700KB    | 1700KB   | 1700KB    |
+| **Deadlock Occurrence**| Critical ⚠️| Critical ⚠️| Critical ⚠️|
+
+</div>
+
+**Failure Analysis**  
+
+<div align="center">
+
+| Metric              | Value       |
+|---------------------|-------------|
+| Total Requests      | 5           |
+| Successful Allocs   | 0           |
+| Avg Fragmentation   | 1700KB (Max)|
+| Deadlock Frequency  | 100%        |
+
+</div>
+
+<div align="center">
+  <img src="OS_imgs/Scenario5_Graph_MASnF.png" width="45%" alt="Allocation Success & Fragmentation">
+  <img src="OS_imgs/Scenario5_Graph_RnDO.png" width="45%" alt="Runtime & Deadlock">
+</div>
+
+<div align="center">
+
+> 💥 *All strategies failed when resource requests exceeded system capacity. Fragmentation remained at maximum.*
+
+</div>
+
+### Scenario 6: Fragmentation Test
+
+<div align="center">
+
+| **Metric**            | First Fit | Best Fit | Worst Fit |
+|-----------------------|-----------|----------|-----------|
+| **Success Rate**      | 80% ✅   | 80% ✅  | 60% ⚠️   |
+| **Avg Fragmentation** | 330KB     | 290KB    | 250KB     |
+| **Deadlock Occurrence**| High ⚠️  | Medium ⚠️| Medium ⚠️|
+
+</div>
+
+**Fragmentation Comparison**  
+
+<div align="center">
+
+| Strategy   | Start | End  | Reduction |
+|------------|-------|------|-----------|
+| First Fit  | 1200KB| 330KB| 72.5%     |
+| Best Fit   | 700KB | 290KB| 58.6%     |
+| Worst Fit  | 700KB | 250KB| 64.3%     |
+
+</div>
+
+<div align="center">
+  <img src="OS_imgs/Scenario6_Graph_MASnF.png" width="45%" alt="Allocation Success & Fragmentation">
+  <img src="OS_imgs/Scenario6_Graph_RnDO.png" width="45%" alt="Runtime & Deadlock">
+</div>
+
+<div align="center">
+
+> 🏆 *Best Fit showed best memory efficiency (290KB avg fragmentation) despite identical success rate to First Fit.*
+
+</div>
 
 ---
 
-## 📄 License
+<div align="center">
 
-This project is licensed under the MIT License.  
-Feel free to fork, modify, and use this project for your OS studies or research!
+## 🧠 Key Findings & Recommendations
+
+</div>
+
+<div align="center">
+
+### 🥇 Strategy Performance Ranking
+
+</div>
+
+1. **First Fit** 
+   - ✅ Highest allocation success (63.3% avg)
+   - ⚠️ Highest deadlock occurrence
+   - 💡 Recommended for general use
+
+2. **Best Fit**
+   - ✅ Best memory efficiency
+   - ✅ Moderate deadlock avoidance
+   - 💡 Recommended for memory-constrained systems
+
+3. **Worst Fit**
+   - ❌ Poorest performance
+   - ⚠️ High fragmentation
+   - ⚠️ Not recommended
+
+<div align="center">
+
+### 📈 Memory Efficiency Analysis
+
+</div>
+
+```mermaid
+pie
+    title Fragmentation Efficiency
+    "Best Fit" : 45
+    "First Fit" : 30
+    "Worst Fit" : 25
+```
 
 ---
 
-**Happy Simulating! 🚦**
+<div align="center">
+  
+# 🎉 Simulation Complete!
+
+### *Developed with ❤️ by G6: OS Simulation Team*
+
+</div>
